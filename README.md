@@ -64,6 +64,9 @@ Everyday DBA checks and housekeeping.
 |---|---|---|---|
 | [`db_instance_overview.sql`](general/db_instance_overview.sql) | SQL | Database role and modes, RAC instances, PDBs, key settings, last patches | 19c, 21c |
 | [`alert_log_errors.sql`](general/alert_log_errors.sql) | SQL | Alert log errors for the last N hours via SQL, with a count by ORA- code | 19c, 21c |
+| [`tablespace_usage.sql`](general/tablespace_usage.sql) | SQL | Tablespace size, used and free space with autoextend limits (run in each PDB) | 12c, 19c, 21c |
+| [`tablespace_usage_all_pdbs.sql`](general/tablespace_usage_all_pdbs.sql) | SQL | Tablespace usage for every container at once, run from CDB$ROOT | 12c, 19c, 21c |
+| [`pdb_status.sql`](general/pdb_status.sql) | SQL | All PDBs with open mode, restricted flag, size and saved state | 12c, 19c, 21c |
 
 ## OS
 
