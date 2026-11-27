@@ -14,7 +14,7 @@ Website: [bajwaconsulting.com](https://bajwaconsulting.com) · Tutorials: [bajwa
 | Section | Folder | What you'll find |
 |---|---|---|
 | [Backups](#backups) | [`backups/`](backups) | RMAN, Data Pump and logical backups; restore tests; backup reporting |
-| [Tuning](#tuning) | [`tuning/`](tuning) | Top SQL, waits, AWR/ASH queries, execution plans, statistics |
+| [Tuning](#tuning) | [`tuning/`](tuning) | Instance tuning (waits, memory, I/O, locks, AWR/ASH) and SQL tuning (plans, statistics, indexes) |
 | [High Availability](#high-availability) | [`ha/`](ha) | Data Guard, GoldenGate and RAC checks, switchover and lag monitoring |
 | [General](#general) | [`general/`](general) | Space, users, sessions, locks, invalid objects, health checks |
 | [OS](#os) | [`os/`](os) | Linux/Unix checks: disk, memory, CPU, processes, alert-log scanning |
@@ -46,12 +46,32 @@ RMAN backup and recovery, Data Pump exports and restore verification.
 
 ## Tuning
 
-Finding and fixing slow SQL and database bottlenecks.
+Tuning is split in two: **instance tuning** (the whole database: waits, memory, I/O, locks, load) and **SQL tuning** (one statement or one schema: plans, statistics, indexes).
+
+> Scripts marked **Diagnostics Pack** or **Tuning Pack** read ASH/AWR or run advisors. Those are separately licensed Oracle Enterprise Edition options; run them only if you are licensed.
+
+### Instance tuning — [`tuning/instance/`](tuning/instance)
 
 | Script | Language | Description | Versions |
 |---|---|---|---|
-| [`top_sql_and_active_sessions.sql`](tuning/top_sql_and_active_sessions.sql) | SQL | Active sessions by wait event, blocking sessions, top SQL with Exadata offload % | 19c, 21c |
-| [`wait_events_exadata_offload.sql`](tuning/wait_events_exadata_offload.sql) | SQL | Time model, top wait events, Exadata Smart Scan and storage index efficiency | 19c, 21c |
+| [`top_sql_and_active_sessions.sql`](tuning/instance/top_sql_and_active_sessions.sql) | SQL | Active sessions by wait event, blocking sessions, top SQL with Exadata offload % | 19c, 21c |
+| [`wait_events_exadata_offload.sql`](tuning/instance/wait_events_exadata_offload.sql) | SQL | Time model, top wait events, Exadata Smart Scan and storage index efficiency | 19c, 21c |
+| [`blocking_lock_tree.sql`](tuning/instance/blocking_lock_tree.sql) | SQL | Who blocks whom as a tree, locked objects, and the KILL command for the root blocker (printed, not run) | 19c, 21c |
+| [`memory_advisors.sql`](tuning/instance/memory_advisors.sql) | SQL | SGA components, SGA and PGA target advice, PGA over-allocation, automatic resize operations | 19c, 21c |
+| [`redo_and_io_latency.sql`](tuning/instance/redo_and_io_latency.sql) | SQL | Read/write ms per tablespace and datafile, commit latency, redo log size and switch rate | 19c, 21c |
+| [`ash_top_activity.sql`](tuning/instance/ash_top_activity.sql) | SQL | Last N minutes from ASH by wait class, event, SQL_ID, module and session — **Diagnostics Pack** | 19c, 21c |
+| [`awr_load_profile_trend.sql`](tuning/instance/awr_load_profile_trend.sql) | SQL | Per-snapshot load: active sessions, CPU, IOPS, redo, transactions, executions — **Diagnostics Pack** | 19c, 21c |
+
+### SQL tuning — [`tuning/sql/`](tuning/sql)
+
+| Script | Language | Description | Versions |
+|---|---|---|---|
+| [`sql_details.sql`](tuning/sql/sql_details.sql) | SQL | One SQL_ID: text, child cursors with per-execution figures, profile/baseline/patch, bind values, plan | 19c, 21c |
+| [`sql_plan_history.sql`](tuning/sql/sql_plan_history.sql) | SQL | Plan changes for one SQL_ID over AWR history, best plan, how to fix it with SPM — **Diagnostics Pack** | 19c, 21c |
+| [`stats_health.sql`](tuning/sql/stats_health.sql) | SQL | Stale, missing and locked optimizer statistics for a schema, rows changed, auto stats job | 19c, 21c |
+| [`index_usage.sql`](tuning/sql/index_usage.sql) | SQL | Indexes with no recorded use, their size, and foreign keys without an index | 19c, 21c |
+| [`sql_plan_management.sql`](tuning/sql/sql_plan_management.sql) | SQL | SQL plan baselines, SQL profiles and SQL patches in the database, and SPM settings | 19c, 21c |
+| [`sql_tuning_advisor.sql`](tuning/sql/sql_tuning_advisor.sql) | SQL | **Makes changes** (creates an advisor task). Runs the SQL Tuning Advisor on a SQL_ID — **Tuning Pack** | 19c, 21c |
 
 ## High Availability
 
@@ -97,6 +117,8 @@ dba-scripts/
 ├── LICENSE
 ├── backups/
 ├── tuning/
+│   ├── instance/
+│   └── sql/
 ├── ha/
 │   ├── dataguard/
 │   ├── goldengate/

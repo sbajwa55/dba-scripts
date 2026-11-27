@@ -3,7 +3,7 @@
 -- Purpose  : Top non-idle wait events since instance startup, time
 --            model (DB time vs CPU), and Exadata efficiency: Smart
 --            Scan, storage indexes and flash cache
--- Section  : Tuning
+-- Section  : Tuning / Instance
 -- Database : Oracle 19c, 21c (CDB or non-CDB; RAC, Exadata)
 -- Run as   : SYSTEM or a user with SELECT_CATALOG_ROLE
 -- Where    : CDB$ROOT or non-CDB, on each RAC instance (figures are

@@ -4,7 +4,7 @@
 --            grouped by wait event, blocking sessions, and the top
 --            SQL by elapsed time in the shared pool (with Exadata
 --            Smart Scan offload figures)
--- Section  : Tuning
+-- Section  : Tuning / Instance
 -- Database : Oracle 19c, 21c (CDB or non-CDB; RAC, Exadata)
 -- Run as   : SYSTEM or a user with SELECT_CATALOG_ROLE
 -- Where    : CDB: run in CDB$ROOT to see every PDB (Container column).
