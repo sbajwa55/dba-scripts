@@ -16,8 +16,8 @@ Website: [bajwaconsulting.com](https://bajwaconsulting.com) · Tutorials: [bajwa
 | [Backups](#backups) | [`backups/`](backups) | RMAN, Data Pump and logical backups; restore tests; backup reporting |
 | [Tuning](#tuning) | [`tuning/`](tuning) | Instance tuning (waits, memory, I/O, locks, AWR/ASH) and SQL tuning (plans, statistics, indexes) |
 | [High Availability](#high-availability) | [`ha/`](ha) | Data Guard, GoldenGate and RAC checks, switchover and lag monitoring |
-| [General](#general) | [`general/`](general) | Space, users, sessions, locks, invalid objects, health checks |
-| [OS](#os) | [`os/`](os) | Linux/Unix checks: disk, memory, CPU, processes, alert-log scanning |
+| [General](#general) | [`general/`](general) | Parameters, character set, users and profiles, sessions, alert log, invalid objects, privileges, scheduler jobs, space |
+| [OS](#os) | [`os/`](os) | Linux/Unix checks: disk, memory, CPU, processes, alert-log and listener-log scanning |
 
 ### Languages used
 
@@ -97,6 +97,15 @@ Everyday DBA checks and housekeeping.
 | [`tablespace_usage.sql`](general/tablespace_usage.sql) | SQL | Tablespace size, used and free space with autoextend limits (run in each PDB) | 12c, 19c, 21c |
 | [`tablespace_usage_all_pdbs.sql`](general/tablespace_usage_all_pdbs.sql) | SQL | Tablespace usage for every container at once, run from CDB$ROOT | 12c, 19c, 21c |
 | [`pdb_status.sql`](general/pdb_status.sql) | SQL | All PDBs with open mode, restricted flag, size and saved state | 12c, 19c, 21c |
+| [`characterset_nls.sql`](general/characterset_nls.sql) | SQL | Database and national character set, NLS at database/instance/session level, time zone file, BYTE vs CHAR columns | 19c, 21c |
+| [`key_parameters.sql`](general/key_parameters.sql) | SQL | Key init parameters, everything changed from default, hidden and deprecated ones, SPFILE vs memory, RAC differences, resource limits | 19c, 21c |
+| [`users_by_profile.sql`](general/users_by_profile.sql) | SQL | Users per profile and account status, passwords about to expire, unused accounts, default passwords, old 10G hashes | 19c, 21c |
+| [`profile_limits.sql`](general/profile_limits.sql) | SQL | Every profile's resource and password limits side by side (DEFAULT resolved), users per profile, users near SESSIONS_PER_USER | 19c, 21c |
+| [`session_summary.sql`](general/session_summary.sql) | SQL | Sessions by container, user, machine and program; long-idle sessions; PROCESSES and SESSIONS usage | 19c, 21c |
+| [`alert_log_events.sql`](general/alert_log_events.sql) | SQL | Alert log over N days: messages per day, startups/shutdowns, ORA-600/7445, ALTER SYSTEM/DATABASE, checkpoint problems, ADR incidents | 19c, 21c |
+| [`invalid_objects.sql`](general/invalid_objects.sql) | SQL | Invalid objects, unusable indexes, disabled constraints and triggers, registry components not VALID | 19c, 21c |
+| [`privileged_users.sql`](general/privileged_users.sql) | SQL | DBA and other powerful role grantees, SYSDBA etc. in the password file, ANY privileges, extra grants to PUBLIC | 19c, 21c |
+| [`scheduler_jobs_status.sql`](general/scheduler_jobs_status.sql) | SQL | Failed scheduler job runs with errors, failures per job, running jobs, broken/disabled jobs, maintenance windows | 19c, 21c |
 
 ## OS
 
@@ -106,6 +115,7 @@ Operating-system checks that matter to a DBA.
 |---|---|---|---|
 | [`db_host_check.ksh`](os/db_host_check.ksh) | KSH | Load, memory, HugePages, disk space, instances, listeners, Exadata image | 19c, 21c |
 | [`alert_log_scan.ksh`](os/alert_log_scan.ksh) | KSH | Scan every database and ASM alert log on the server for recent errors | 19c, 21c |
+| [`listener_log_scan.ksh`](os/listener_log_scan.ksh) | KSH | Every listener log on the server: connections and failures per day, TNS- errors by code, top hosts/services/programs, oversized logs | 19c, 21c |
 
 ---
 
