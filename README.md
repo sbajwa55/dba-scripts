@@ -17,7 +17,7 @@ Website: [bajwaconsulting.com](https://bajwaconsulting.com) · Tutorials: [bajwa
 | [Tuning](#tuning) | [`tuning/`](tuning) | Instance tuning (waits, memory, I/O, locks, AWR/ASH) and SQL tuning (plans, statistics, indexes) |
 | [High Availability](#high-availability) | [`ha/`](ha) | Data Guard, GoldenGate and RAC checks, switchover and lag monitoring |
 | [General](#general) | [`general/`](general) | Parameters, character set, users and profiles, sessions, alert log, invalid objects, privileges, scheduler jobs, space |
-| [OS](#os) | [`os/`](os) | Linux/Unix checks: disk, memory, CPU, processes, alert-log and listener-log scanning |
+| [OS](#os) | [`os/`](os) | Linux/Unix: prerequisites, HugePages, I/O, top processes, log and audit cleanup, certificates, cron, alert/listener logs |
 
 ### Languages used
 
@@ -127,6 +127,18 @@ Operating-system checks that matter to a DBA.
 | [`db_host_check.ksh`](os/db_host_check.ksh) | KSH | Load, memory, HugePages, disk space, instances, listeners, Exadata image | 19c, 21c |
 | [`alert_log_scan.ksh`](os/alert_log_scan.ksh) | KSH | Scan every database and ASM alert log on the server for recent errors | 19c, 21c |
 | [`listener_log_scan.ksh`](os/listener_log_scan.ksh) | KSH | Every listener log on the server: connections and failures per day, TNS- errors by code, top hosts/services/programs, oversized logs | 19c, 21c |
+| [`adr_purge_cleanup.ksh`](os/adr_purge_cleanup.ksh) | KSH | **Makes changes with -delete.** ADR space per home (trace, incident, cdump) and files older than N days; purges them with adrci | 19c, 21c |
+| [`audit_file_cleanup.ksh`](os/audit_file_cleanup.ksh) | KSH | **Makes changes with -delete.** .aud/.xml audit files per directory, inode use, removal of files older than N days | 19c, 21c |
+| [`archivelog_fs_watch.ksh`](os/archivelog_fs_watch.ksh) | KSH | FRA quota and archive destination filesystems for every running instance against WARN/CRIT, exit code for monitoring | 19c, 21c |
+| [`oracle_prereq_check.ksh`](os/oracle_prereq_check.ksh) | KSH | PASS/WARN/FAIL for kernel parameters, shell limits, HugePages, THP, swap, RPMs, time sync, SELinux | 19c, 21c |
+| [`hugepages_calculator.ksh`](os/hugepages_calculator.ksh) | KSH | Recommended vm.nr_hugepages and memlock from the SGAs running now, current HugePages use per instance | 19c, 21c |
+| [`oracle_inventory_report.ksh`](os/oracle_inventory_report.ksh) | KSH | Every Oracle home with version, owner and patches; oratab databases and whether they are running; listeners | 19c, 21c |
+| [`os_top_oracle_processes.ksh`](os/os_top_oracle_processes.ksh) | KSH | Top Oracle processes by CPU (3-second sample) and memory, mapped to SID, user, SQL_ID and wait event | 19c, 21c |
+| [`io_stats_snapshot.ksh`](os/io_stats_snapshot.ksh) | KSH | iostat over a few minutes: IOPS, MB/s, read/write ms and % busy per device with ASM disk names, SLOW/BUSY flags | 19c, 21c |
+| [`oswatcher_check.ksh`](os/oswatcher_check.ksh) | KSH | Is OSWatcher / AHF / ExaWatcher running and how fresh its data is, archive age and disk use | 19c, 21c |
+| [`oracle_file_permissions.ksh`](os/oracle_file_permissions.ksh) | KSH | oracle binary setuid bits, world-writable files in each home, oratab, password files, wallets, network files | 19c, 21c |
+| [`cert_expiry_check.ksh`](os/cert_expiry_check.ksh) | KSH | Expiry date of every certificate in Oracle wallets and PEM files (GoldenGate, listeners), exit code for monitoring | 19c, 21c |
+| [`crontab_backup_report.ksh`](os/crontab_backup_report.ksh) | KSH | Saves a copy of each crontab; for each job: schedule, log file, last run and error lines in its log | 19c, 21c |
 
 ---
 
