@@ -157,7 +157,8 @@ dba-scripts/
 │   ├── goldengate/
 │   └── rac/
 ├── general/
-└── os/
+├── os/
+└── tools/            build_scripts_json.py: builds the website's scripts.json from the script headers
 ```
 
 Use subfolders when a section grows (for example `ha/goldengate/`). Name files in lowercase with underscores, and give them the right extension: `.sql`, `.ksh`, `.sh`, `.py`, `.tf`, `.spl`.
