@@ -81,10 +81,21 @@ Data Guard, GoldenGate and RAC monitoring and operations.
 |---|---|---|---|
 | [`dataguard_status.sql`](ha/dataguard/dataguard_status.sql) | SQL | Data Guard role, lag, destinations, gaps and apply processes | 19c, 21c |
 | [`dataguard_alerts.sql`](ha/dataguard/dataguard_alerts.sql) | SQL | Data Guard errors from V$DATAGUARD_STATUS and the alert log | 19c, 21c |
+| [`dg_switchover_readiness.sql`](ha/dataguard/dg_switchover_readiness.sql) | SQL | PASS/WARN/FAIL checklist before a switchover: force logging, flashback, broker, standby redo logs, transport, gaps, parameters | 19c, 21c |
+| [`standby_apply_progress.sql`](ha/dataguard/standby_apply_progress.sql) | SQL | On the standby: apply rate, lag and lag history, received vs applied sequence per thread, MRP/RFS processes | 19c, 21c |
+| [`dg_redo_transport.sql`](ha/dataguard/dg_redo_transport.sql) | SQL | On the primary: SYNC/ASYNC settings per destination, errors, last shipped and applied log per thread, logs shipped per day | 19c, 21c |
+| [`dg_broker_check.ksh`](ha/dataguard/dg_broker_check.ksh) | KSH | Broker configuration and member status, VALIDATE DATABASE for each standby, exit code for monitoring | 19c, 21c |
 | [`gg_db_capture_apply_status.sql`](ha/goldengate/gg_db_capture_apply_status.sql) | SQL | GoldenGate prerequisites, integrated Extract and Replicat status | 19c, 21c |
 | [`ggserr_log_scan.ksh`](ha/goldengate/ggserr_log_scan.ksh) | KSH | Scan ggserr.log for ERROR/WARNING lines, summarised by OGG code | 19c, 21c |
+| [`gg_lag_check.ksh`](ha/goldengate/gg_lag_check.ksh) | KSH | Every Extract/Replicat with status, lag and checkpoint age against thresholds, exit code for monitoring (Classic or saved Admin Client output) | 19c, 21c |
+| [`gg_supplemental_logging.sql`](ha/goldengate/gg_supplemental_logging.sql) | SQL | Is a schema ready to replicate: database/schema/table supplemental logging, tables without keys, unsupported tables | 19c, 21c |
+| [`gg_integrated_health.sql`](ha/goldengate/gg_integrated_health.sql) | SQL | Streams pool size, oldest archive log each Extract still needs (and if it is on disk), Replicat error queue | 19c, 21c |
 | [`rac_cluster_status.sql`](ha/rac/rac_cluster_status.sql) | SQL | RAC instances, services per node, interconnect, global cache waits | 19c, 21c |
 | [`crs_asm_status.ksh`](ha/rac/crs_asm_status.ksh) | KSH | Clusterware resources, voting disks, ASM disk groups, CRS/ASM alert errors | 19c, 21c |
+| [`rac_services_check.ksh`](ha/rac/rac_services_check.ksh) | KSH | Each service's preferred/available/running instances; flags DOWN, FAILED OVER and missing instances with the srvctl fix | 19c, 21c |
+| [`rac_load_balance.sql`](ha/rac/rac_load_balance.sql) | SQL | Load per instance, sessions per service on each node, service goal/failover/TAC settings, services that are down | 19c, 21c |
+| [`rac_gc_interconnect.sql`](ha/rac/rac_gc_interconnect.sql) | SQL | Global cache receive times, lost/corrupt blocks, GC traffic, top cluster waits, hottest segments across nodes | 19c, 21c |
+| [`asm_diskgroup_health.sql`](ha/rac/asm_diskgroup_health.sql) | SQL | ASM disk groups: free and usable space after mirroring, offline disks, imbalance between disks, running rebalances | 19c, 21c |
 
 ## General
 
