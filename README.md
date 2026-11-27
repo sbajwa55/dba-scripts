@@ -33,6 +33,16 @@ RMAN backup and recovery, Data Pump exports and restore verification.
 |---|---|---|---|
 | [`rman_backup_status.sql`](backups/rman_backup_status.sql) | SQL | RMAN jobs for the last N days and age of the last successful backup of each type | 19c, 21c |
 | [`backup_coverage_fra.sql`](backups/backup_coverage_fra.sql) | SQL | Datafiles with no recent backup, Fast Recovery Area usage, non-default RMAN settings | 19c, 21c |
+| [`rman_backup_progress.sql`](backups/rman_backup_progress.sql) | SQL | Running RMAN jobs: % done, time left, channel waits | 19c, 21c |
+| [`backup_size_trend.sql`](backups/backup_size_trend.sql) | SQL | Daily backup volume, compression ratio and throughput by backup type | 19c, 21c |
+| [`archivelog_generation.sql`](backups/archivelog_generation.sql) | SQL | Redo generated per day, log switches per hour, archive logs never backed up | 19c, 21c |
+| [`block_corruption_check.sql`](backups/block_corruption_check.sql) | SQL | Corrupt blocks and their segments, corruption in backups, NOLOGGING changes since last backup | 19c, 21c |
+| [`flashback_restore_points.sql`](backups/flashback_restore_points.sql) | SQL | Flashback Database window and space, restore points, old guaranteed restore points | 19c, 21c |
+| [`datapump_jobs_status.sql`](backups/datapump_jobs_status.sql) | SQL | Data Pump jobs, progress, worker sessions, orphaned jobs | 19c, 21c |
+| [`rman_backup.ksh`](backups/rman_backup.ksh) | KSH | **Makes changes.** RMAN level 0 / level 1 / archive log backup with logging, cleanup of obsolete backups and e-mail on failure | 19c, 21c |
+| [`rman_restore_validate.ksh`](backups/rman_restore_validate.ksh) | KSH | Proves the backups can be restored (RESTORE … VALIDATE) without restoring anything | 19c, 21c |
+| [`datapump_export.ksh`](backups/datapump_export.ksh) | KSH | **Makes changes.** Consistent schema or full Data Pump export with checksums and removal of old exports | 19c, 21c |
+| [`pg_backup.sh`](backups/pg_backup.sh) | Bash | **Makes changes.** PostgreSQL pg_dump of one or all databases plus roles, with a readability check and cleanup | PostgreSQL 13–17, RDS |
 
 ## Tuning
 
